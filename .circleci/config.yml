@@ -10,14 +10,14 @@ commands:
             to:
               type: string
               default: "Hello World"
-          steps:
+        steps:
             - run: echo << parameters.to >>
 
 jobs:
     greeting:
         docker:
             - image: "circleci/node:9.6.1"
-          steps:
+        steps:
             - sayhello:
                 to: "Shingo"
 
