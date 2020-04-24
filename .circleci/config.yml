@@ -13,13 +13,19 @@ commands:
         steps:
             - run: echo Hello, << parameters.to >>
 
-jobs:
-    greeting:
+executors:
+    node-env:
         docker:
             - image: "circleci/node:9.6.1"
+        environment:
+            - NAME: Shingo
+
+jobs:
+    greeting:
+        executor: node-env
         steps:
             - sayhello:
-                to: "Shingo"
+                to: ${NAME}
 
 workflows:
     "Hello Workflow":
