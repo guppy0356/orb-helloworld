@@ -3,7 +3,26 @@ version: 2.1
 orbs:
     hello: circleci/hello-build@volatile
 
+commands:
+    sayhello:
+        description: "A very simple command for demonstration purposes"
+        parameters:
+            to:
+              type: string
+              default: "Hello World"
+          steps:
+            - run: echo << parameters.to >>
+
+jobs:
+    greeting:
+        docker:
+            - image: "circleci/node:9.6.1"
+          steps:
+            - sayhello:
+                to: "Shingo"
+
 workflows:
     "Hello Workflow":
         jobs:
           - hello/hello-build
+          - greeting
