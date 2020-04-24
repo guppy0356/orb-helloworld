@@ -26,9 +26,20 @@ jobs:
         steps:
             - sayhello:
                 to: ${NAME}
-
+    greeting-everyone:
+        parameters:
+            to:
+              type: string
+        executor: node-env
+        steps:
+            - sayhello:
+                to: << parameters.to >>
 workflows:
     "Hello Workflow":
         jobs:
           - hello/hello-build
           - greeting
+          - greeting-everyone:
+                matrix:
+                    parameters:
+                        to: ['Akira', "Hiroshi"]
